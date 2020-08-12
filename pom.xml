@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>no.udp.yacas</groupId>
   <artifactId>yacas-server</artifactId>
-  <version>0.1</version>
+  <version>0.0.1</version>
 
   <parent>
     <groupId>io.micronaut</groupId>
@@ -16,10 +16,11 @@
     <jdk.version>14</jdk.version>
     <release.version>14</release.version>
     <micronaut.version>2.0.1</micronaut.version>
-    <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.2.0</asciidoctorj.version>
     <asciidoctorj.diagram.version>2.0.1</asciidoctorj.diagram.version>
     <jruby.version>9.2.11.1</jruby.version>
+    <lombok.version>1.18.12</lombok.version>
+    <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
     <exec.mainClass>no.udp.yacas.Application</exec.mainClass>
   </properties>
 
@@ -29,7 +30,6 @@
       <url>https://jcenter.bintray.com</url>
     </repository>
   </repositories>
-
 
   <dependencies>
     <dependency>
@@ -73,6 +73,12 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
@@ -101,15 +107,32 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>--enable-preview</argLine>
+          <detail>true</detail>
+          <includes>
+            <include>%regex[.*]</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
+          <release>${jdk.version}</release>
           <!-- Uncomment to enable incremental compilation -->
           <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
           <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
             <path>
               <groupId>io.micronaut</groupId>
               <artifactId>micronaut-inject-java</artifactId>
@@ -122,6 +145,7 @@
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
+            <arg>--enable-preview</arg>
             <arg>-Amicronaut.processing.group=no.udp.yacas</arg>
             <arg>-Amicronaut.processing.module=yacas-server</arg>
           </compilerArgs>
@@ -134,6 +158,11 @@
             </goals>
             <configuration>
               <annotationProcessorPaths>
+                <path>
+                  <groupId>org.projectlombok</groupId>
+                  <artifactId>lombok</artifactId>
+                  <version>${lombok.version}</version>
+                </path>
                 <path>
                   <groupId>io.micronaut</groupId>
                   <artifactId>micronaut-inject-java</artifactId>
