@@ -1,0 +1,4 @@
+micronaut:
+  application:
+    name: yacasServer
+redis.uri: redis://localhost
