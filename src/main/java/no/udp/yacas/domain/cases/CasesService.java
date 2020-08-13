@@ -1,10 +1,11 @@
-package no.udp.yacas.api.cases;
+package no.udp.yacas.domain.cases;
 
 import no.udp.yacas.domain.UserId;
 
 import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,18 @@ public class CasesService {
 
     public void addCase(Case c) {
         casesRepository.put(c.getUserId(), c);
+    }
+
+    public void removeCase(UserId userId) {
+        casesRepository.remove(userId);
+    }
+
+    public void removeAllCases() {
+        casesRepository.clear();
+    }
+
+    public Optional<Case> findCase(UserId userId) {
+        return Optional.ofNullable(casesRepository.get(userId));
     }
 
     public Set<Case> findCases(Set<UserId> contacts) {
