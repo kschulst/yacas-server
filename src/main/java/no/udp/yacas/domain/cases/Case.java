@@ -1,4 +1,4 @@
-package no.udp.yacas.api.cases;
+package no.udp.yacas.domain.cases;
 
 import io.micronaut.core.annotation.Introspected;
 import lombok.AllArgsConstructor;

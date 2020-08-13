@@ -1,8 +1,8 @@
-package no.udp.yacas.api.matches;
+package no.udp.yacas.domain.matches;
 
 import lombok.RequiredArgsConstructor;
-import no.udp.yacas.api.cases.Case;
-import no.udp.yacas.api.cases.CasesService;
+import no.udp.yacas.domain.cases.Case;
+import no.udp.yacas.domain.cases.CasesService;
 import no.udp.yacas.domain.UserId;
 
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package no.udp.yacas.api.matches;
+package no.udp.yacas.domain.matches;
 
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.http.HttpResponse;
@@ -7,7 +7,7 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import no.udp.yacas.api.cases.Case;
+import no.udp.yacas.domain.cases.Case;
 import no.udp.yacas.domain.UserId;
 
 import javax.validation.Valid;
